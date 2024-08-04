@@ -33,7 +33,8 @@ module.exports = async (req, res) => {
         const userData = data.data[0];
 
         const formattedClan = userData.clan
-            ? `Tag: ${userData.clan.tag}, Badge: ${userData.clan.badge}`
+            ? `Tag: ${userData.clan.tag}
+               Badge: ${userData.clan.badge}`
             : 'No clan information';
 
         res.json({
