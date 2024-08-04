@@ -52,11 +52,11 @@ module.exports = async (req, res) => {
             globalName: userData.global_name,
             discriminator: userData.discriminator,
             publicFlags: userData.public_flags,
+            flags: userData.flags,
             accentColor: userData.accent_color,
             bannerColor: userData.banner_color,
             clan: formattedClan,
             avatarDecorationData: avatarDecorationData,
-            flagsListed: userData.flags_listed,
             avatarImage: extractImageUrl(userData.avatar_image),
             bannerImage: extractImageUrl(userData.banner_image),
         });
