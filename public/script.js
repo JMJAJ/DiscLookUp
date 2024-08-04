@@ -34,6 +34,7 @@ document.getElementById('userForm').addEventListener('submit', function (e) {
                 <p>Discriminator: ${data.discriminator}</p>
                 <p>Public Flags: ${data.publicFlags}</p>
                 <p>Flags: ${data.flags}</p>
+                <p>Flags Listed: ${data.flagsListed}</p>
                 <p>Accent Color: ${data.accentColor}</p>
                 <p>Banner Color: ${data.bannerColor}</p>
                 <p>Clan: ${data.clan}</p>

@@ -57,6 +57,7 @@ module.exports = async (req, res) => {
             bannerColor: userData.banner_color,
             clan: formattedClan,
             avatarDecorationData: avatarDecorationData,
+            flagsListed: userData.flagsListed,
             avatarImage: extractImageUrl(userData.avatar_image),
             bannerImage: extractImageUrl(userData.banner_image),
         });
