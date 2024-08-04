@@ -17,67 +17,38 @@ document.getElementById('userForm').addEventListener('submit', function (e) {
             return response.json();
         })
         .then((data) => {
-            const cardContainer = document.getElementById('cardContainer');
+            const userInfoContainer = document.getElementById('userInfo');
+            const bannerContainer = document.getElementById('bannerContainer');
 
             if (data.error) {
-                cardContainer.innerHTML = `<p>Error: ${data.error}</p>`;
+                userInfoContainer.innerHTML = `<p>Error: ${data.error}</p>`;
                 return;
             }
 
+            bannerContainer.style.backgroundColor = data.bannerColor || '#121212'; // Fallback color
+
             const userInfoHtml = `
-                <div class="card">
-                    <h2>${data.username}#${data.discriminator}</h2>
-                    <p>Discord ID: ${data.discordId}</p>
-                    <p>Global Name: ${data.globalName}</p>
-                    <p>Discriminator: ${data.discriminator}</p>
-                    <p>Public Flags: ${data.publicFlags}</p>
-                    <p>Flags: ${data.flags}</p>
-                    <p>Accent Color: ${data.accentColor}</p>
-                    <p>Banner Color: ${data.bannerColor}</p>
-                    <p>Clan: ${data.clan}</p>
-                    <p>Flags Listed: ${data.flagsListed}</p>
-                    <p>Avatar Decoration Asset: ${data.avatarDecorationAsset}</p>
-                    <p>SKU ID: ${data.skuId}</p>
-                    ${data.avatarImage ? `<img src="${data.avatarImage}" alt="Avatar" />` : ''}
-                    ${data.bannerImage ? `<img src="${data.bannerImage}" alt="Banner" />` : ''}
-                </div>
+                <h2>${data.username}#${data.discriminator}</h2>
+                <p>Discord ID: ${data.discordId}</p>
+                <p>Global Name: ${data.globalName}</p>
+                <p>Discriminator: ${data.discriminator}</p>
+                <p>Public Flags: ${data.publicFlags}</p>
+                <p>Flags: ${data.flags}</p>
+                <p>Flags Listed: ${data.flagsListed}</p>
+                <p>Accent Color: ${data.accentColor}</p>
+                <p>Banner Color: ${data.bannerColor}</p>
+                <p>Clan: ${data.clan}</p>
+                <p>Flags Listed: ${data.flagsListed}</p>
+                <p>Avatar Decoration Asset: ${data.avatarDecorationData.asset}</p>
+                <p>SKU ID: ${data.avatarDecorationData.skuId}</p>
+                ${data.avatarImage ? `<img src="${data.avatarImage}" alt="Avatar" />` : ''}
+                ${data.bannerImage ? `<img src="${data.bannerImage}" alt="Banner" />` : ''}
             `;
 
-            cardContainer.innerHTML = userInfoHtml;
-
-            // Initialize swipe functionality
-            initializeSwipe();
+            userInfoContainer.innerHTML = userInfoHtml;
         })
         .catch((error) => {
             console.error('Fetch error:', error);
-            document.getElementById('cardContainer').innerHTML = '<p>An error occurred. Please try again later.</p>';
+            document.getElementById('userInfo').innerHTML = '<p>An error occurred. Please try again later.</p>';
         });
 });
-
-// Swipe functionality
-function initializeSwipe() {
-    const cardContainer = document.getElementById('cardContainer');
-    let startX, currentX, moveX;
-
-    cardContainer.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    });
-
-    cardContainer.addEventListener('touchmove', (e) => {
-        currentX = e.touches[0].clientX;
-        moveX = startX - currentX;
-        const card = document.querySelector('.card');
-        card.style.transform = `translateX(${moveX}px)`;
-    });
-
-    cardContainer.addEventListener('touchend', (e) => {
-        const card = document.querySelector('.card');
-        if (Math.abs(moveX) > 100) {
-            // Swipe detected
-            card.style.transform = `translateX(${moveX > 0 ? '-100%' : '100%'})`;
-        } else {
-            // Not enough swipe distance
-            card.style.transform = 'translateX(0)';
-        }
-    });
-}
