@@ -39,6 +39,7 @@ module.exports = async (req, res) => {
             discriminator: userData.discriminator,
             publicFlags: userData.public_flags,
             accentColor: userData.accent_color,
+            bannerColor: userData.banner_color,
             clan: userData.clan,
             flagsListed: userData.flags_listed,
             avatarImage: extractImageUrl(userData.avatar_image),

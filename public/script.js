@@ -33,6 +33,7 @@ document.getElementById('userForm').addEventListener('submit', function (e) {
                 <p>Public Flags: ${data.publicFlags}</p>
                 <p>Flags: ${data.flags}</p>
                 <p>Accent Color: ${data.accentColor}</p>
+                <p>Banner Color: ${data.bannerColor}</p>
                 <p>Clan: ${data.clan}</p>
                 <p>Flags Listed: ${data.flagsListed}</p>
                 <p>Avatar Decoration Asset: ${data.avatarDecorationAsset}</p>
