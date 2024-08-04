@@ -32,6 +32,10 @@ module.exports = async (req, res) => {
 
         const userData = data.data[0];
 
+        const formattedClan = userData.clan
+            ? `Tag: ${userData.clan.tag}, Badge: ${userData.clan.badge}`
+            : 'No clan information';
+
         res.json({
             discordId: userData.id,
             username: userData.username,
@@ -40,7 +44,7 @@ module.exports = async (req, res) => {
             publicFlags: userData.public_flags,
             accentColor: userData.accent_color,
             bannerColor: userData.banner_color,
-            clan: userData.clan,
+            clan: formattedClan,
             flagsListed: userData.flags_listed,
             avatarImage: extractImageUrl(userData.avatar_image),
             bannerImage: extractImageUrl(userData.banner_image),

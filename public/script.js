@@ -3,7 +3,6 @@ document.getElementById('userForm').addEventListener('submit', function (e) {
 
     const userId = document.getElementById('userId').value;
 
-    // Make a POST request to the serverless function to fetch Discord user information
     fetch('/api/getDiscordUser', {
         method: 'POST',
         headers: {
@@ -19,11 +18,14 @@ document.getElementById('userForm').addEventListener('submit', function (e) {
         })
         .then((data) => {
             const userInfoContainer = document.getElementById('userInfo');
+            const bannerContainer = document.getElementById('bannerContainer');
 
             if (data.error) {
                 userInfoContainer.innerHTML = `<p>Error: ${data.error}</p>`;
                 return;
             }
+
+            bannerContainer.style.backgroundColor = data.bannerColor || '#121212'; // Fallback color
 
             const userInfoHtml = `
                 <h2>${data.username}#${data.discriminator}</h2>

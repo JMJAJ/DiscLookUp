@@ -94,3 +94,12 @@ form button:hover {
 #userInfo img:hover {
     transform: scale(1.1);
 }
+
+#bannerContainer {
+    height: 200px;
+    width: 100%;
+    background-color: #121212; /* Default background color */
+    border-radius: 10px;
+    margin-top: 20px;
+    position: relative;
+}
