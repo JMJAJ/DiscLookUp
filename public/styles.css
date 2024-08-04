@@ -1,0 +1,96 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212; /* Dark background */
+    color: #f5f5f5; /* Light text for dark mode */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto; /* Centered with some top margin */
+    padding: 30px; /* Increased padding for more space */
+    background: linear-gradient(135deg, #212121, #1e1e1e); /* Gradient background for a subtle 3D effect */
+    border-radius: 20px; /* Rounded corners for a modern look */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5); /* Deep shadow for 3D effect */
+    position: relative; /* For pseudo-element */
+    overflow: hidden; /* Hide overflow for pseudo-element */
+}
+
+.container:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: linear-gradient(135deg, #ff9800, #ffa726); /* Gradient border */
+    border-radius: 30px; /* Rounded corners for border */
+    z-index: -1; /* Behind the container */
+}
+
+.container:hover:before {
+    transform: scale(1.1); /* Scale up on hover for a dynamic effect */
+}
+
+h1 {
+    text-align: center;
+    color: #ff9800; /* Vibrant orange */
+    font-size: 2em; /* Larger font size for heading */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Text shadow for 3D effect */
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px; /* Space below the form */
+}
+
+form input {
+    padding: 12px; /* Increased padding for a modern look */
+    border: none; /* Remove border */
+    background-color: #2e2e2e; /* Darker background */
+    color: #f5f5f5; /* Light text */
+    font-size: 1.1em; /* Slightly larger font */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
+    transition: box-shadow 0.3s ease; /* Smooth transition */
+}
+
+form input:focus {
+    box-shadow: 0px 0px 20px rgba(255, 167, 38, 0.8); /* Glow effect on focus */
+    outline: none; /* Remove outline */
+}
+
+form button {
+    padding: 12px 24px; /* Larger padding for a modern look */
+    background-color: #ff9800; /* Orange button */
+    color: #121212; /* Dark text for contrast */
+    border: none;
+    border-radius: 20px; /* Rounded corners */
+    font-size: 1.1em;
+    cursor: pointer;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
+    transition: box-shadow 0.3s ease; /* Smooth transition */
+}
+
+form button:hover {
+    box-shadow: 0px 10px 30px rgba(255, 167, 38, 0.5); /* Deeper shadow on hover */
+    transform: translateY(-2px); /* Move up on hover */
+}
+
+#userInfo {
+    margin-top: 30px; /* Slightly larger top margin */
+    text-align: center;
+}
+
+#userInfo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px; /* Rounded corners for images */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4); /* Shadow for 3D effect */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+#userInfo img:hover {
+    transform: scale(1.1); /* Scale up on hover for a dynamic effect */
+}
