@@ -36,6 +36,16 @@ module.exports = async (req, res) => {
             ? `Tag: ${userData.clan.tag}<br>Badge: ${userData.clan.badge}`
             : 'No clan information';
 
+        const avatarDecorationData = userData.avatar_decoration_data
+            ? {
+                asset: userData.avatar_decoration_data.asset,
+                skuId: userData.avatar_decoration_data.sku_id,
+            }
+            : {
+                asset: 'No asset available',
+                skuId: 'No SKU ID available',
+        };
+
         res.json({
             discordId: userData.id,
             username: userData.username,
@@ -45,6 +55,7 @@ module.exports = async (req, res) => {
             accentColor: userData.accent_color,
             bannerColor: userData.banner_color,
             clan: formattedClan,
+            avatarDecorationData: avatarDecorationData,
             flagsListed: userData.flags_listed,
             avatarImage: extractImageUrl(userData.avatar_image),
             bannerImage: extractImageUrl(userData.banner_image),

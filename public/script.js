@@ -38,8 +38,8 @@ document.getElementById('userForm').addEventListener('submit', function (e) {
                 <p>Banner Color: ${data.bannerColor}</p>
                 <p>Clan: ${data.clan}</p>
                 <p>Flags Listed: ${data.flagsListed}</p>
-                <p>Avatar Decoration Asset: ${data.avatarDecorationAsset}</p>
-                <p>SKU ID: ${data.skuId}</p>
+                <p>Avatar Decoration Asset: ${data.avatarDecorationData.asset}</p>
+                <p>SKU ID: ${data.avatarDecorationData.skuId}</p>
                 ${data.avatarImage ? `<img src="${data.avatarImage}" alt="Avatar" />` : ''}
                 ${data.bannerImage ? `<img src="${data.bannerImage}" alt="Banner" />` : ''}
             `;
