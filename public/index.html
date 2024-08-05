@@ -6,26 +6,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <center>
-        <div class="container">
-            <h1>Discord User Information</h1>
-            <div id="cardWrapper">
-                <div id="prevLookups" class="card swipeable-card"></div>
-                <div id="currentLookup" class="card swipeable-card current-card">
-                    <form id="userForm">
-                        <label for="userId">Enter User ID:</label>
-                        <input type="text" id="userId" name="userId" required>
-                        <button type="submit">Lookup</button>
-                    </form>
-                    <div id="userInfo"></div>
-                    <div id="bannerContainer"></div>
-                </div>
-                <div id="newLookup" class="card swipeable-card">
-                    <button id="addLookupButton">+</button>
-                </div>
-            </div>
+    <h1>Discord User Information</h1>
+    <div id="cardWrapper">
+        <div id="prevLookups" class="card swipeable-card"></div>
+        <div id="currentLookup" class="card swipeable-card current-card">
+            <form id="userForm">
+                <label for="userId">Enter User ID:</label>
+                <input type="text" id="userId" name="userId" required>
+                <button type="submit">Lookup</button>
+            </form>
+            <div id="userInfo"></div>
+            <div id="bannerContainer"></div>
         </div>
-        <script src="script.js"></script>
-    </center>
+        <div id="newLookup" class="card swipeable-card">
+            <button id="addLookupButton">+</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
