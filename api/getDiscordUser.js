@@ -12,7 +12,8 @@ module.exports = async (req, res) => {
             return res.status(400).json({ error: 'User ID is required' });
         }
 
-        const discordIdLookupResponse = await axios.post(
+        // Make the POST request to the Discord ID lookup service
+        const response = await axios.post(
             'https://discordid.nealvos.nl/lookup/index.php',
             `discord_id=${userId}`,
             {
@@ -23,39 +24,22 @@ module.exports = async (req, res) => {
             }
         );
 
-        const discordIdLookupData = discordIdLookupResponse.data;
-        if (discordIdLookupData.data.length === 0) {
+        const data = response.data;
+
+        if (data.data.length === 0) {
             return res.status(404).json({ error: 'No user information found' });
         }
 
-        const userDataFromFirstApi = discordIdLookupData.data[0];
+        const userData = data.data[0];
 
-        const discordLookupResponse = await axios.post(
-            'https://discordlookup.com/livewire/message/lookup.user',
-            {
-                effects: {
-                    html: "",
-                    path: `https://discordlookup.com/user/${userId}`,
-                    dirty: []
-                },
-                serverMemo: {
-                    data: {
-                        snowflake: userId
-                    }
-                }
-            }
-        );
-
-        const discordLookupData = discordLookupResponse.data.serverMemo.data;
-
-        const formattedClan = userDataFromFirstApi.clan
-            ? `Tag: ${userDataFromFirstApi.clan.tag}<br>Badge: ${userDataFromFirstApi.clan.badge}`
+        const formattedClan = userData.clan
+            ? `Tag: ${userData.clan.tag}<br>Badge: ${userData.clan.badge}`
             : 'No clan information';
 
-        const avatarDecorationData = userDataFromFirstApi.avatar_decoration_data
+        const avatarDecorationData = userData.avatar_decoration_data
             ? {
-                asset: userDataFromFirstApi.avatar_decoration_data.asset,
-                skuId: userDataFromFirstApi.avatar_decoration_data.sku_id,
+                asset: userData.avatar_decoration_data.asset,
+                skuId: userData.avatar_decoration_data.sku_id,
             }
             : {
                 asset: 'No asset available',
@@ -63,31 +47,19 @@ module.exports = async (req, res) => {
         };
 
         res.json({
-            discordId: userDataFromFirstApi.id,
-            username: userDataFromFirstApi.username,
-            globalName: userDataFromFirstApi.global_name,
-            discriminator: userDataFromFirstApi.discriminator,
-            publicFlags: userDataFromFirstApi.public_flags,
-            flags: userDataFromFirstApi.flags,
-            accentColor: userDataFromFirstApi.accent_color,
-            bannerColor: userDataFromFirstApi.banner_color,
+            discordId: userData.id,
+            username: userData.username,
+            globalName: userData.global_name,
+            discriminator: userData.discriminator,
+            publicFlags: userData.public_flags,
+            flags: userData.flags,
+            accentColor: userData.accent_color,
+            bannerColor: userData.banner_color,
             clan: formattedClan,
             avatarDecorationData: avatarDecorationData,
-            flagsListed: userDataFromFirstApi.flagsListed,
-            avatarImage: extractImageUrl(userDataFromFirstApi.avatar_image),
-            bannerImage: extractImageUrl(userDataFromFirstApi.banner_image),
-
-            // Additional fields from the new API
-            isBot: discordLookupData.userData.isBot || false,
-            isSpammer: discordLookupData.userData.isSpammer || false,
-            premiumType: discordLookupData.userData.premiumType || null,
-            flagsList: discordLookupData.userData.flagsList || [],
-            clanDetails: {
-                clanName: discordLookupData.userClanData.name || 'Unknown',
-                clanDescription: discordLookupData.userClanData.description || '',
-                clanMemberCount: discordLookupData.userClanData.memberCount || 0,
-                clanPlaystyle: discordLookupData.userClanData.playstyleName || 'Unknown',
-            }
+            flagsListed: userData.flagsListed,
+            avatarImage: extractImageUrl(userData.avatar_image),
+            bannerImage: extractImageUrl(userData.banner_image),
         });
     } catch (error) {
         console.error('Error fetching Discord user information:', error);
