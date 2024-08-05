@@ -1,12 +1,7 @@
 document.getElementById('userForm').addEventListener('submit', function (e) {
     e.preventDefault(); // Prevent form submission
 
-    const userId = document.getElementById('userId').value.trim();
-
-    if (!userId) {
-        document.getElementById('userInfo').innerHTML = '<p>Please enter a valid User ID.</p>';
-        return;
-    }
+    const userId = document.getElementById('userId').value;
 
     fetch('/api/getDiscordUser', {
         method: 'POST',
@@ -17,9 +12,7 @@ document.getElementById('userForm').addEventListener('submit', function (e) {
     })
         .then((response) => {
             if (!response.ok) {
-                return response.json().then((errData) => {
-                    throw new Error(`Error: ${response.status} - ${errData.error || 'Network response was not ok'}`);
-                });
+                throw new Error('Network response was not ok');
             }
             return response.json();
         })
@@ -36,23 +29,18 @@ document.getElementById('userForm').addEventListener('submit', function (e) {
 
             const userInfoHtml = `
                 <h2>${data.username}#${data.discriminator}</h2>
-                <p><strong>Discord ID:</strong> ${data.discordId}</p>
-                <p><strong>Global Name:</strong> ${data.globalName}</p>
-                <p><strong>Discriminator:</strong> ${data.discriminator}</p>
-                <p><strong>Public Flags:</strong> ${data.publicFlags}</p>
-                <p><strong>Flags:</strong> ${data.flags}</p>
-                <p><strong>Flags Listed:</strong> ${data.flagsListed}</p>
-                <p><strong>Accent Color:</strong> ${data.accentColor}</p>
-                <p><strong>Banner Color:</strong> ${data.bannerColor}</p>
-                <p><strong>Clan:</strong> ${data.clan}</p>
-                <p><strong>Bio:</strong> ${data.bio}</p>
-                <p><strong>Created At:</strong> ${data.createdAt}</p>
-                <p><strong>Locale:</strong> ${data.locale}</p>
-                <p><strong>Email:</strong> ${data.email}</p>
-                <p><strong>Verified:</strong> ${data.verified ? 'Yes' : 'No'}</p>
-                <p><strong>Phone:</strong> ${data.phone}</p>
-                <p><strong>Avatar Decoration Asset:</strong> ${data.avatarDecorationData.asset}</p>
-                <p><strong>SKU ID:</strong> ${data.avatarDecorationData.skuId}</p>
+                <p>Discord ID: ${data.discordId}</p>
+                <p>Global Name: ${data.globalName}</p>
+                <p>Discriminator: ${data.discriminator}</p>
+                <p>Public Flags: ${data.publicFlags}</p>
+                <p>Flags: ${data.flags}</p>
+                <p>Flags Listed: ${data.flagsListed}</p>
+                <p>Accent Color: ${data.accentColor}</p>
+                <p>Banner Color: ${data.bannerColor}</p>
+                <p>Clan: ${data.clan}</p>
+                <p>Flags Listed: ${data.flagsListed}</p>
+                <p>Avatar Decoration Asset: ${data.avatarDecorationData.asset}</p>
+                <p>SKU ID: ${data.avatarDecorationData.skuId}</p>
                 ${data.avatarImage ? `<img src="${data.avatarImage}" alt="Avatar" />` : ''}
                 ${data.bannerImage ? `<img src="${data.bannerImage}" alt="Banner" />` : ''}
             `;
@@ -61,6 +49,6 @@ document.getElementById('userForm').addEventListener('submit', function (e) {
         })
         .catch((error) => {
             console.error('Fetch error:', error);
-            document.getElementById('userInfo').innerHTML = `<p>An error occurred: ${error.message}. Please try again later.</p>`;
+            document.getElementById('userInfo').innerHTML = '<p>An error occurred. Please try again later.</p>';
         });
 });
