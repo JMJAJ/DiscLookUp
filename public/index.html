@@ -6,10 +6,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Discord User Information</h1>
     <div id="cardWrapper">
-        <div id="prevLookups" class="card swipeable-card"></div>
-        <div id="currentLookup" class="card swipeable-card current-card">
+        <div id="prevLookups" class="card">
+            <!-- Past lookups will be rendered here -->
+            <p>No previous lookups</p>
+        </div>
+        <div id="currentLookup" class="card current-card">
+            <h1>Discord User Information</h1>
             <form id="userForm">
                 <label for="userId">Enter User ID:</label>
                 <input type="text" id="userId" name="userId" required>
@@ -18,7 +21,7 @@
             <div id="userInfo"></div>
             <div id="bannerContainer"></div>
         </div>
-        <div id="newLookup" class="card swipeable-card">
+        <div id="newLookup" class="card">
             <button id="addLookupButton">+</button>
         </div>
     </div>
