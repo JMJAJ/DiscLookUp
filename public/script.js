@@ -65,20 +65,20 @@ function generateUserInfoHtml(data) {
     `;
 }
 
-function displayError(error) {
+function displayError(errorMessage) {
     const userInfoContainer = document.getElementById('userInfo');
-    userInfoContainer.innerHTML = `<p>Error: ${error}</p>`;
+    userInfoContainer.innerHTML = `<p>Error: ${errorMessage}</p>`;
 }
 
 function saveLookup(data) {
-    const lookups = JSON.parse(localStorage.getItem('discordLookups')) || [];
-    lookups.unshift(data);
-    localStorage.setItem('discordLookups', JSON.stringify(lookups));
+    let lookups = JSON.parse(localStorage.getItem('lookups') || '[]');
+    lookups.push(data);
+    localStorage.setItem('lookups', JSON.stringify(lookups));
 }
 
 function updatePastLookups() {
-    const lookups = JSON.parse(localStorage.getItem('discordLookups')) || [];
-    const prevLookupsContainer = document.getElementById('lookupScroll');
+    const prevLookupsContainer = document.getElementById('prevLookups');
+    let lookups = JSON.parse(localStorage.getItem('lookups') || '[]');
 
     if (lookups.length === 0) {
         prevLookupsContainer.innerHTML = '<p>No previous lookups</p>';
