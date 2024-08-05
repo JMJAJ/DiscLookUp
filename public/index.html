@@ -9,14 +9,20 @@
     <center>
         <div class="container">
             <h1>Discord User Information</h1>
-            <form id="userForm">
-                <label for="userId">Enter User ID:</label>
-                <input type="text" id="userId" name="userId" required>
-                <button type="submit">Lookup</button>
-            </form>
-            <div id="cardsContainer">
-                <div id="userInfo" class="card"></div>
-                <div id="bannerContainer"></div>
+            <div id="cardWrapper">
+                <div id="prevLookups" class="card swipeable-card"></div>
+                <div id="currentLookup" class="card swipeable-card current-card">
+                    <form id="userForm">
+                        <label for="userId">Enter User ID:</label>
+                        <input type="text" id="userId" name="userId" required>
+                        <button type="submit">Lookup</button>
+                    </form>
+                    <div id="userInfo"></div>
+                    <div id="bannerContainer"></div>
+                </div>
+                <div id="newLookup" class="card swipeable-card">
+                    <button id="addLookupButton">+</button>
+                </div>
             </div>
         </div>
         <script src="script.js"></script>
