@@ -71,9 +71,9 @@ function displayError(errorMessage) {
 }
 
 function saveLookup(data) {
-    let lookups = JSON.parse(localStorage.getItem('lookups') || '[]');
+    let lookups = JSON.parse(localStorage.getItem('discordLookups') || '[]');
     lookups.push(data);
-    localStorage.setItem('lookups', JSON.stringify(lookups));
+    localStorage.setItem('discordLookups', JSON.stringify(lookups));
 }
 
 document.getElementById('clearHistoryButton').addEventListener('click', function () {
@@ -82,7 +82,7 @@ document.getElementById('clearHistoryButton').addEventListener('click', function
 });
 
 function updatePastLookups() {
-    const lookups = JSON.parse(localStorage.getItem('discordLookups')) || [];
+    const lookups = JSON.parse(localStorage.getItem('discordLookups') || '[]');
     const prevLookupsContainer = document.getElementById('lookupScroll');
 
     if (lookups.length === 0) {
@@ -99,6 +99,4 @@ function updatePastLookups() {
     `).join('');
 }
 
-
-// Initialize past lookups on page load
 updatePastLookups();
