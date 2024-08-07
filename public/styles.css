@@ -120,6 +120,24 @@ form button:hover {
     color: #ffb74d;
 }
 
+#clearHistoryButton {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ff9800;
+    color: #121212;
+    border: none;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#clearHistoryButton:hover {
+    box-shadow: 0px 10px 30px rgba(255, 167, 38, 0.5);
+    transform: translateY(-2px);
+}
+
 .lookup-card {
     text-align: left;
     margin-bottom: 10px;

@@ -76,9 +76,14 @@ function saveLookup(data) {
     localStorage.setItem('lookups', JSON.stringify(lookups));
 }
 
+document.getElementById('clearHistoryButton').addEventListener('click', function () {
+    localStorage.removeItem('discordLookups');
+    updatePastLookups();
+});
+
 function updatePastLookups() {
-    const prevLookupsContainer = document.getElementById('prevLookups');
-    let lookups = JSON.parse(localStorage.getItem('lookups') || '[]');
+    const lookups = JSON.parse(localStorage.getItem('discordLookups')) || [];
+    const prevLookupsContainer = document.getElementById('lookupScroll');
 
     if (lookups.length === 0) {
         prevLookupsContainer.innerHTML = '<p>No previous lookups</p>';
@@ -93,6 +98,7 @@ function updatePastLookups() {
         </div>
     `).join('');
 }
+
 
 // Initialize past lookups on page load
 updatePastLookups();
