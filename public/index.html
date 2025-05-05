@@ -1,74 +1,139 @@
-<!DOCTYPE html>
 <html lang="en">
+
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord User Lookup</title>
+
+
+    <title>Discord User Information</title>
+
+
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png">
+
+
+
+
+
 </head>
+
 <body>
-    <div class="container">
-        <div id="cardWrapper">
-            <div id="prevLookups" class="card">
-                <div class="card-title">
-                    <h2>Previous Lookups</h2>
-                </div>
-                <div id="lookupScroll" class="scroll-container">
-                    <!-- Past lookups will be rendered here -->
-                    <div class="empty-state">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                        <p>No previous lookups found</p>
-                    </div>
-                </div>
-                <button id="clearHistoryButton" class="secondary">Clear History</button>
+
+
+    <div id="cardWrapper">
+
+
+        <div id="prevLookups" class="card">
+
+
+            <!-- Past lookups will be rendered here -->
+
+
+            <div id="lookupScroll" class="scroll-container">
+
+
+                <p>No previous lookups</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
-            
-            <div id="currentLookup" class="card current-card">
-                <h1>Discord User Lookup</h1>
-                <form id="userForm">
-                    <div class="input-group">
-                        <input type="text" id="userId" name="userId" placeholder=" " required>
-                        <label for="userId">Enter Discord User ID</label>
-                    </div>
-                    <button type="submit" class="lookup-button">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                        Lookup User
-                    </button>
-                </form>
-                
-                <div id="loadingIndicator" class="loading" style="display: none;">
-                    <div class="loading-spinner"></div>
-                </div>
-                
-                <div id="userInfo" class="fade-in"></div>
-            </div>
-            
-            <div id="newLookup" class="card">
-                <div class="card-title">
-                    <h2>New Lookup</h2>
-                </div>
-                <p>Click the button below to start a new user lookup.</p>
-                <button id="addLookupButton" class="tooltip" data-tooltip="New Lookup">+</button>
-            </div>
+
+
+            <button id="clearHistoryButton">Clear History</button>
+
+
         </div>
+
+
+        <div id="currentLookup" class="card current-card">
+
+
+            <h1>Discord User Information</h1>
+
+
+            <form id="userForm">
+
+
+                <label for="userId">Enter User ID:</label>
+
+
+                <input type="text" id="userId" name="userId" required>
+
+
+                <button type="submit">Lookup</button>
+
+
+            </form>
+
+
+            <div id="userInfo"></div>
+
+
+            <div id="bannerContainer"></div>
+
+
+        </div>
+
+
+        <div id="newLookup" class="card">
+
+
+            <button id="addLookupButton">+</button>
+
+        </div>
+
     </div>
-    
-    <div class="toast-container" id="toastContainer">
-        <!-- Toast notifications will appear here -->
-    </div>
-    
+
+
+
+
+
+
     <script src="script.js"></script>
+
 </body>
+
 </html>
