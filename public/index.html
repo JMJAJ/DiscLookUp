@@ -1,139 +1,24 @@
+<!DOCTYPE html>
 <html lang="en">
-
-
 <head>
-
-    <meta charset="UTF-8">
-
-
-    <title>Discord User Information</title>
-
-
-    <link rel="stylesheet" href="styles.css">
-
-
-
-
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Discord User Lookup</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-
-    <div id="cardWrapper">
-
-
-        <div id="prevLookups" class="card">
-
-
-            <!-- Past lookups will be rendered here -->
-
-
-            <div id="lookupScroll" class="scroll-container">
-
-
-                <p>No previous lookups</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </div>
-
-
-            <button id="clearHistoryButton">Clear History</button>
-
-
-        </div>
-
-
-        <div id="currentLookup" class="card current-card">
-
-
-            <h1>Discord User Information</h1>
-
-
-            <form id="userForm">
-
-
-                <label for="userId">Enter User ID:</label>
-
-
-                <input type="text" id="userId" name="userId" required>
-
-
-                <button type="submit">Lookup</button>
-
-
-            </form>
-
-
-            <div id="userInfo"></div>
-
-
-            <div id="bannerContainer"></div>
-
-
-        </div>
-
-
-        <div id="newLookup" class="card">
-
-
-            <button id="addLookupButton">+</button>
-
-        </div>
-
-    </div>
-
-
-
-
-
-
-    <script src="script.js"></script>
-
+<div class="container">
+    <h1>Discord User Lookup</h1>
+    <form id="userForm">
+        <label for="userId">User ID</label>
+        <input type="text" id="userId" name="userId" placeholder="Enter Discord User ID" required>
+        <button type="submit">Look Up User</button>
+    </form>
+    <div id="userInfo"></div>
+</div>
+
+<script src="script.js"></script>
 </body>
-
 </html>
