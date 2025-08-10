@@ -1,69 +1,52 @@
 document.getElementById('userForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+    e.preventDefault(); // Prevent form submission
 
-    const userId = document.getElementById('userId').value.trim();
-    const userInfoContainer = document.getElementById('userInfo');
-    const submitButton = document.querySelector('button[type="submit"]');
+    const userId = document.getElementById('userId').value;
 
-    // Show loading state
-    submitButton.disabled = true;
-    submitButton.innerHTML = '<div class="loading"></div>';
-    userInfoContainer.innerHTML = '';
-    userInfoContainer.classList.remove('show');
-
-    // Make a POST request to the local Node.js server
+    // Make a POST request to the local Node.js server to fetch Discord user information
     fetch('http://localhost:3000/getDiscordUser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                userId: userId
-            }),
-        })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: userId }), // Send user ID in the request body
+    })
         .then((response) => {
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error('Network response was not ok');
             }
             return response.json();
         })
         .then((data) => {
+            const userInfoContainer = document.getElementById('userInfo');
+
             if (data.error) {
-                userInfoContainer.innerHTML = `<div class="error">❌ ${data.error}</div>`;
-            } else {
-                const userInfoHtml = `
-                    <h2>${data.username}${data.discriminator !== '0' ? `#${data.discriminator}` : ''}</h2>
-                    ${data.avatarImage ? `<img src="${data.avatarImage}" alt="User Avatar" />` : ''}
-                    ${data.bannerImage ? `<img src="${data.bannerImage}" alt="User Banner" />` : ''}
-                    <div class="user-details">
-                        <p><strong>Discord ID:</strong> ${data.discordId}</p>
-                        ${data.globalName ? `<p><strong>Display Name:</strong> ${data.globalName}</p>` : ''}
-                        ${data.accentColor ? `<p><strong>Accent Color:</strong> #${data.accentColor.toString(16).padStart(6, '0')}</p>` : ''}
-                        ${data.publicFlags ? `<p><strong>Public Flags:</strong> ${data.publicFlags}</p>` : ''}
-                        ${data.flags ? `<p><strong>Flags:</strong> ${data.flags}</p>` : ''}
-                        ${data.clan ? `<p><strong>Clan:</strong> ${data.clan}</p>` : ''}
-                        ${data.flagsListed ? `<p><strong>Flags Listed:</strong> ${data.flagsListed}</p>` : ''}
-                        ${data.avatarDecorationAsset ? `<p><strong>Avatar Decoration:</strong> ${data.avatarDecorationAsset}</p>` : ''}
-                        ${data.skuId ? `<p><strong>SKU ID:</strong> ${data.skuId}</p>` : ''}
-                    </div>
-                `;
-                userInfoContainer.innerHTML = userInfoHtml;
+                userInfoContainer.innerHTML = `<p>Error: ${data.error}</p>`;
+                return;
             }
 
-            // Show results with animation
-            setTimeout(() => {
-                userInfoContainer.classList.add('show');
-            }, 100);
+            const userInfoHtml = `
+            <h2>${data.username}#${data.discriminator}</h2>
+            <p>Discord ID: ${data.discordId}</p>
+            <p>Global Name: ${data.globalName}</p>
+            <p>Discriminator: ${data.discriminator}</p>
+            <p>Public Flags: ${data.publicFlags}</p>
+            <p>Flags: ${data.flags}</p>
+            <p>Accent Color: ${data.accentColor}</p>
+            <p>Clan: ${data.clan}</p>
+            <p>Flags Listed: ${data.flagsListed}</p>
+            <p>Avatar Decoration Asset: ${data.avatarDecorationAsset}</p>
+            <p>SKU ID: ${data.skuId}</p>
+            ${data.avatarImage ? `<img src="${data.avatarImage}" alt="Avatar" />` : ''}
+            ${data.bannerImage ? `<img src="${data.bannerImage}" alt="Banner" />` : ''}
+        `;
+        
+
+            userInfoContainer.innerHTML = userInfoHtml;
         })
         .catch((error) => {
             console.error('Fetch error:', error);
-            userInfoContainer.innerHTML = `<div class="error">❌ Failed to fetch user information. Please check if the server is running and try again.</div>`;
-            userInfoContainer.classList.add('show');
-        })
-        .finally(() => {
-            // Reset button state
-            submitButton.disabled = false;
-            submitButton.innerHTML = '<span>Lookup User</span>';
+            document.getElementById('userInfo').innerHTML = '<p>An error occurred. Please try again later.</p>';
         });
 });
 
